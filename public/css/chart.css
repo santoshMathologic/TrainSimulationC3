@@ -1,0 +1,54 @@
+
+.axis path, 
+.axis line { fill: none; stroke: black; shape-rendering: crispEdges; } 
+.line { fill: none; stroke: steelblue; stroke-width:0.5px; } 
+
+
+
+
+.tooltip {
+	padding: 12px;
+	margin: 2px;
+	color :blue;
+	height: auto;
+	width: auto;
+	display: none;
+	box-shadow: 0px 0px 20px rgba(94, 80, 80, 0.99);
+	background-color: white;
+	position: absolute;
+}
+
+.headertext{
+ font-weight: bold;
+ font-family: "Times New Roman", Times, serif;
+ 
+}
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}

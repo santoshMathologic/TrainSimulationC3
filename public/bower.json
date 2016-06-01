@@ -1,0 +1,11 @@
+{
+  "name": "TrainSimulation",
+  "authors": [
+    "santosh <santosh.citech@gmail.com>"
+  ],
+  "description": "\"Bower Components\"",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true
+}
