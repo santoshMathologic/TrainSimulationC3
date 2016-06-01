@@ -14,7 +14,7 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
     function getTrainStationList() {
         $scope.query = {
             order: 'stopNo',
-            limit: 50,
+            limit: 9000,
             page: 1,
             stopNo: "",
             trainNo: 11014
@@ -88,8 +88,10 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                 x: {
                     type: 'timeseries',
                     tick: {
+                        fit:false,
                         format: '%H:%M'
-                    }
+                    },
+                    
                 },
 
                 y: {
@@ -97,7 +99,8 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                         values: distance,
                         format: function (d) { return stationCode[d]; }
 
-                    }
+                    },
+                  //  extent:stationCode,
                 }
             },
             size: {
@@ -112,6 +115,20 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                 }
 
 
+            },
+            zoom: {
+               /* onzoomend: function (colDistance) {
+                    return colDistance;
+                }
+                */
+                enabled:true,
+                rescale: true
+            },
+            subchart: {
+                show: true,
+                size: {
+                    height:20
+                  }
             }
 
 
