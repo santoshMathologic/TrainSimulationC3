@@ -13,11 +13,9 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
 
     function getTrainStationList() {
         $scope.query = {
-            order: 'stopNo',
-            limit: 9000,
+            order: 'trainNO',
+            limit: 200,
             page: 1,
-            stopNo: "",
-            trainNo: 11014
         };
         var deferred = $q.defer();
         $http.get(apiUrl + "/trainStation", { params: $scope.query })
@@ -80,8 +78,6 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                 columns: [
                     timeSeries,
                     colDistance,
-
-
                 ]
             },
             axis: {
@@ -117,10 +113,6 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
 
             },
             zoom: {
-               /* onzoomend: function (colDistance) {
-                    return colDistance;
-                }
-                */
                 enabled:true,
                 rescale: true
             },
