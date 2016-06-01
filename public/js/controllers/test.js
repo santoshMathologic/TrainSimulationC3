@@ -99,11 +99,19 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
 
                     }
                 }
-
-
             },
             size: {
                 height: 700
+            },
+            tooltip: {
+                format: {
+                    value: function (colDistance) {
+                        return colDistance;
+                    }
+
+                }
+
+
             }
 
 
