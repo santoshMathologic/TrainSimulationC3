@@ -37,15 +37,15 @@ var trainStations = {
             trainup: req.query.trainup,
             traindown: req.query.traindown
         };
-        var deferred = q.defer();
+        
         trainstation.find({trainNo: { $in: [options.trainup, options.traindown] } }, function (err,post) {
-            console.log(post);
+            
             if (err) console.log(err);
-            deferred.resolve(post);
+             res.json(post);
 
         });
 
-        return deferred.promise;
+        
 
     },
 

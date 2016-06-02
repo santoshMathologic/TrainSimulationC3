@@ -10,7 +10,7 @@ app.controller('homeCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
     };
     var apiUrl = api.protocol + '://' + api.server + ':' + api.port + api.baseUrl;
     $scope.trainStationsList = [];
-    $scope.trainStnsList = [];
+  
     $scope.Days = Days;
 
 
@@ -26,20 +26,21 @@ app.controller('homeCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
         var deferred = $q.defer();
         $http.get(apiUrl + "/trainStations", { params: $scope.query })
             .then(function (response) {
-                deferred.resolve(response.data.results);
+                deferred.resolve(response.data);
             });
 
         return deferred.promise;
     }
     getTrainStationList().then(function (response) {
-        $scope.trainStations = response;
-
-        console.log($scope.trainStations);
+        $scope.trainStationsList = response;
 
     });
 
 
-
+  $scope.saveStation = function(){
+      
+      console.log("Dasd");
+  }
 
 
 

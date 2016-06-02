@@ -14,7 +14,7 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
     function getTrainStationList() {
         $scope.query = {
             order: 'trainNo',
-            limit: 200,
+            limit: 204,
             page: 1,
             // trainNo: {$in:[11014,11013 ]}
             trainNo: 1101 // if remove one digit from trainNo its takes as $In query
@@ -47,9 +47,8 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
         var downdistance = [];
         if ($scope.trainStations) {
             for (var i = 0; i < $scope.trainStations.length; i++) {
-                if ($scope.trainStations[i].trainNo == 11014 || $scope.trainStations[i].trainNo == 11013) {
+                if ($scope.trainStations[i].trainNo != 11010) {
                     $scope.trainStationTwo.push($scope.trainStations[i]);
-
                 }
 
             }
@@ -77,19 +76,24 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                 }
             }
 
+            var depMins = [];
             for (var j = 0; j < $scope.trainStationTwo.length; j++) {
-                if ($scope.trainStationTwo[j].trainNo == 11014) {
+                if ($scope.trainStationTwo[j].trainNo == 11011) {
                     if ($scope.trainStationTwo[j].arrivalTime === "0:00") {
                         updistance.push($scope.trainStationTwo[j].distance);
+                        depMins.push($scope.trainStationTwo[j].departureMinutes)
                     } else {
                         updistance.push($scope.trainStationTwo[j].distance);
+                        depMins.push($scope.trainStationTwo[j].departureMinutes)
                     }
 
-                } else {
+                } else if ($scope.trainStationTwo[j].trainNo == 11012) {
                     if ($scope.trainStationTwo[j].arrivalTime === "0:00") {
                         downdistance.push($scope.trainStationTwo[j].distance);
+                        depMins.push($scope.trainStationTwo[j].departureMinutes)
                     } else {
                         downdistance.push($scope.trainStationTwo[j].distance);
+                        depMins.push($scope.trainStationTwo[j].departureMinutes)
                     }
                 }
             }
@@ -105,10 +109,30 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
 
         var udistance = JSON.parse(JSON.stringify(updistance));
         udistance.splice(0, 0, "UpDistance");
-        
+
         var ddistance = JSON.parse(JSON.stringify(downdistance));
         ddistance.splice(0, 0, "downDistance");
-        
+
+        var depMinutes = JSON.parse(JSON.stringify(depMins));
+        depMinutes.splice(0, 0, "departureTime");
+
+        function generatetooltip(tooltip, d) {
+            /*d.forEach(function (res) {
+                console.log("data", res);
+
+            })
+            */
+            
+            console.log("updistance",d[0].name);
+            console.log("updistance",d[0].value);
+            console.log("downdistance",d[1].name);
+            console.log("downdistance",d[1].value);
+          // console.log("depmin",d[2].name);
+          //console.log("depmin",d[2].value);
+
+          //  console.log("data4", tooltip);
+
+        }
 
         var chart = c3.generate({
             bindto: document.getElementById('mathoChart'),
@@ -116,11 +140,13 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                 x: 'x',
                 xFormat: '%Y-%m-%d %H:%M', // 'xFormat' can be used as custom format of 'x'
                 columns: [
+                    
+                    udistance,
+                    ddistance,
                     timeSeries,
                     ///colDistance,
-                    udistance,
-                    ddistance
-                    
+                   
+
 
                 ]
             },
@@ -147,12 +173,16 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                 height: 700
             },
             tooltip: {
-                format: {
-                    value: function (colDistance) {
-                        return colDistance;
-                    }
 
+                contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
+                    generatetooltip(this.tooltip, d);
+
+                    var divcust = document.getElementById("customTips"); 
+                    divcust.innerHTML = divcust.innerHTML + 'Extra stuff';
+                    return '';
+                    
                 }
+
 
 
             },

@@ -38,10 +38,29 @@
 </head>
 
 <body ng-app="mathoApp" ng-controller="homeCtrl">
-
+  <!--
+    <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>trainNo</th>
+        <th>code</th>
+        <th>arrival</th>
+        <th>deparure</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="t in trainStationsList">
+        <td>{{t.trainNo}}</td>
+        <td>{{t.stationCode}}</td>
+        <td>{{t.arrivalTime}}</td>
+        <td>{{t.departureTime}}</td>
+      </tr>
+     
+    </tbody>
+  </table> 
+  !-->
     
-    
-    
+    <input type="button" ng-click="saveStation()">Save</input>
 
 </body>
 
