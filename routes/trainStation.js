@@ -27,6 +27,24 @@ var trainStations = {
             res.json(response);
         });
     },
+    
+      getTrainStations: function (req,res) {
+       
+        var options = {
+            perPage: parseInt(req.query.limit) || 10,
+            page: parseInt(req.query.page) || 1,
+            order : req.query.order || 'stopNo',
+            trainup:req.query.trainup,
+            traindown:req.query.traindown
+       };
+       
+       ts.find({trainNo:{$in:[trainup,traindown]}})
+       
+       console.log(req);
+       
+    },
+    
+    
     deleteTrainStations: function(data){
         var deferred =q.defer();
         ts.remove({ trainNo: { $in: data } }, function(err, docs) {

@@ -1,1 +1,6 @@
 http://localhost:4000/api/v1/trainStation?limit=500&order=trainNo&page=1
+http://localhost:4000/api/v1/trainStation?limit=20&page=1&trainNo=11014
+
+http://localhost:4000/api/v1/trainStations?limit=20&page=1&trainNo=11014
+
+http://localhost:4000/api/v1/trainStations?limit=20&page=1&order=trainNo&traindown=11014&trainup=11013

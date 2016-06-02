@@ -69,10 +69,14 @@ router.post('/api/v1/trainList', trainList.createTrainList);
 router.get('/api/v1/trainList', trainList.getTrainList);
 
 
+
 /*
 Routes for Train Station
  */
 router.get('/api/v1/trainStation', trainStation.findTrain);
+router.get('/api/v1/trainStations', trainStation.getTrainStations);
+
+
 
 /**
  * Routes to handle User Plan Sections
