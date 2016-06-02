@@ -83,15 +83,18 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                     if ($scope.trainStationTwo[j].arrivalTime === "0:00") {
                         updistance.push($scope.trainStationTwo[j].distance);
                         depMins.push($scope.trainStationTwo[j].departureMinutes)
+                        tno.push($scope.trainStationTwo[j].trainNo);
                     } else {
                         updistance.push($scope.trainStationTwo[j].distance);
                         depMins.push($scope.trainStationTwo[j].departureMinutes)
+                        
                     }
 
                 } else if ($scope.trainStationTwo[j].trainNo == 11012) {
                     if ($scope.trainStationTwo[j].arrivalTime === "0:00") {
                         downdistance.push($scope.trainStationTwo[j].distance);
                         depMins.push($scope.trainStationTwo[j].departureMinutes)
+                        tno.push($scope.trainStationTwo[j].trainNo);
                     } else {
                         downdistance.push($scope.trainStationTwo[j].distance);
                         depMins.push($scope.trainStationTwo[j].departureMinutes)
@@ -116,6 +119,9 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
 
         var depMinutes = JSON.parse(JSON.stringify(depMins));
         depMinutes.splice(0, 0, "departureTime");
+        
+        var trnNo = JSON.parse(JSON.stringify(tno));
+        trnNo.splice(0, 0, "trainNo");
 
         function generatetooltip(tooltip, d) {
             if(d!=null){
@@ -140,14 +146,15 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                 xs: {
                     'UpDistance':udistance,
                     'downDistance': ddistance
-                   // 'departureTime': depMinutes,
+                    //'trainNo':trnNo,
+                    //'departureTime': depMinutes,
                 },
 
                 columns: [
                     timeSeries,
                     udistance,
                     ddistance
-                   
+                   // trnNo,
                    // depMinutes
 
                     ///colDistance,
@@ -169,7 +176,7 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
 
                 y: {
                     tick: {
-                        values: distance,
+                        values: colDistance,
                         format: function (d) { return stationCode[d]; }
                     },
 
@@ -179,7 +186,7 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                 height: 550
             },
             color: {
-                pattern: ['#1f77b4', '#004c00','#FF4500']
+                pattern: ['#1f77b4', '#004c00','#FFD700','#FFFF00']
             },
             tooltip: {
 
@@ -187,10 +194,11 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                   //  generatetooltip(this.tooltip,d);
                     return "<div style='padding: 12px;margin: 2px;color :blue;height:200px;width:200px;display:block;box-shadow: 0px 0px 20px rgba(94, 80, 80, 0.99);background-color: white;position: absolute;'>"
 
-                        + "Train No  :" + "<br>"
+                        //+"TN :" + d[2].value + "<br>"+
                         + "distance  :" + d[0].value + "<br>"
                         + "distance  :" + d[1].value + "<br>"+
-                      //  + "departure :" + d[2].value + "<br>"+
+                       // + "departure :" + d[2].value + "<br>"+
+                        
 
                         "</div>";
 
