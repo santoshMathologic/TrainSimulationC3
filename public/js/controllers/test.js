@@ -175,13 +175,17 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
             tooltip: {
 
                 contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
-                    generatetooltip(this.tooltip, d);
-
-                    var divcust = document.getElementById("customTips"); 
-                    divcust.innerHTML = divcust.innerHTML + 'Extra stuff';
-                    return '';
-                    
-                }
+                return "<div style='padding: 12px;margin: 2px;color :blue;height:200px;width:200px;display:block;box-shadow: 0px 0px 20px rgba(94, 80, 80, 0.99);background-color: white;position: absolute;'>"
+                
+                +"Train No :"+"<br>"
+                +"distance : "+d[0].value +"<br>"  
+                +"distance : "+d[1].value+ 
+                
+                
+                
+                "</div>";
+              
+               }
 
 
 
