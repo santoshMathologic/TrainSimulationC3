@@ -77,6 +77,7 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
             }
 
             var depMins = [];
+            var tno = [];
             for (var j = 0; j < $scope.trainStationTwo.length; j++) {
                 if ($scope.trainStationTwo[j].trainNo == 11011) {
                     if ($scope.trainStationTwo[j].arrivalTime === "0:00") {
@@ -117,21 +118,17 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
         depMinutes.splice(0, 0, "departureTime");
 
         function generatetooltip(tooltip, d) {
-            /*d.forEach(function (res) {
-                console.log("data", res);
-
-            })
-            */
+            if(d!=null){
+            console.log("updistance", d[0].name);
+            console.log("updistance", d[0].value);
+            console.log("downdistance", d[1].name);
+            console.log("downdistance", d[1].value);
+            console.log("depmin",d[2].name);
+            console.log("depmin",d[2].value);
+            console.log("data4", tooltip);
+    
+            }
             
-            console.log("updistance",d[0].name);
-            console.log("updistance",d[0].value);
-            console.log("downdistance",d[1].name);
-            console.log("downdistance",d[1].value);
-          // console.log("depmin",d[2].name);
-          //console.log("depmin",d[2].value);
-
-          //  console.log("data4", tooltip);
-
         }
 
         var chart = c3.generate({
@@ -139,13 +136,22 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
             data: {
                 x: 'x',
                 xFormat: '%Y-%m-%d %H:%M', // 'xFormat' can be used as custom format of 'x'
+
+                xs: {
+                    'UpDistance':udistance,
+                    'downDistance': ddistance
+                   // 'departureTime': depMinutes,
+                },
+
                 columns: [
-                    
-                    udistance,
-                    ddistance,
                     timeSeries,
-                    ///colDistance,
+                    udistance,
+                    ddistance
                    
+                   // depMinutes
+
+                    ///colDistance,
+
 
 
                 ]
@@ -170,22 +176,25 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                 }
             },
             size: {
-                height: 700
+                height: 550
+            },
+            color: {
+                pattern: ['#1f77b4', '#004c00','#FF4500']
             },
             tooltip: {
 
                 contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
-                return "<div style='padding: 12px;margin: 2px;color :blue;height:200px;width:200px;display:block;box-shadow: 0px 0px 20px rgba(94, 80, 80, 0.99);background-color: white;position: absolute;'>"
-                
-                +"Train No :"+"<br>"
-                +"distance : "+d[0].value +"<br>"  
-                +"distance : "+d[1].value+ 
-                
-                
-                
-                "</div>";
-              
-               }
+                  //  generatetooltip(this.tooltip,d);
+                    return "<div style='padding: 12px;margin: 2px;color :blue;height:200px;width:200px;display:block;box-shadow: 0px 0px 20px rgba(94, 80, 80, 0.99);background-color: white;position: absolute;'>"
+
+                        + "Train No  :" + "<br>"
+                        + "distance  :" + d[0].value + "<br>"
+                        + "distance  :" + d[1].value + "<br>"+
+                      //  + "departure :" + d[2].value + "<br>"+
+
+                        "</div>";
+
+                }
 
 
 
