@@ -45,7 +45,7 @@ function normalizePort(val) {
 }
 
 
-console.log(cons.swig);
+
 app.engine('html', cons.swig);
 
 // set .html as the default extension 

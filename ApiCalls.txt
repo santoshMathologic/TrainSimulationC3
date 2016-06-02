@@ -4,3 +4,7 @@ http://localhost:4000/api/v1/trainStation?limit=20&page=1&trainNo=11014
 http://localhost:4000/api/v1/trainStations?limit=20&page=1&trainNo=11014
 
 http://localhost:4000/api/v1/trainStations?limit=20&page=1&order=trainNo&traindown=11014&trainup=11013
+
+
+
+API CALL FOR $IN http://localhost:4000/api/v1/trainStations?limit=100&page=1&order=trainNo&trainup=11014&traindown=11013

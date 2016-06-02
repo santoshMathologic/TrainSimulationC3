@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var ts = require('../models/trainStation.js');
+var trainstation = require('../models/trainStation.js');
 var q = require('q');
 var queryResolver = require('../lib/queryResolver.js');
 require('mongoose-query-paginate');
@@ -8,7 +8,7 @@ require('mongoose-query-paginate');
 var trainStations = {
     createTrainStation: function (data) {
         var deferred = q.defer();
-        ts.insertMany(data, function (err, post) {
+        trainstation.insertMany(data, function (err, post) {
             if (err) return err;
             //  console.log(post);
             deferred.resolve(post);
@@ -16,38 +16,43 @@ var trainStations = {
         return deferred.promise;
     },
 
-    findTrain: function (req,res) {
+    findTrain: function (req, res) {
         var options = {
             perPage: parseInt(req.query.limit) || 10,
             page: parseInt(req.query.page) || 1,
-            order : req.query.order || 'stopNo'
-       };
+            order: req.query.order || 'stopNo'
+        };
         var query;
-        queryResolver.resolveQuery(req.query, ts, options).then(function(response) {
+        queryResolver.resolveQuery(req.query, trainstation, options).then(function (response) {
             res.json(response);
         });
     },
-    
-      getTrainStations: function (req,res) {
-       
+
+    getTrainStations: function (req, res) {
+
         var options = {
             perPage: parseInt(req.query.limit) || 10,
             page: parseInt(req.query.page) || 1,
-            order : req.query.order || 'stopNo',
-            trainup:req.query.trainup,
-            traindown:req.query.traindown
-       };
-       
-       ts.find({trainNo:{$in:[trainup,traindown]}})
-       
-       console.log(req);
-       
+            order: req.query.order || 'stopNo',
+            trainup: req.query.trainup,
+            traindown: req.query.traindown
+        };
+        var deferred = q.defer();
+        trainstation.find({trainNo: { $in: [options.trainup, options.traindown] } }, function (err,post) {
+            console.log(post);
+            if (err) console.log(err);
+            deferred.resolve(post);
+
+        });
+
+        return deferred.promise;
+
     },
-    
-    
-    deleteTrainStations: function(data){
-        var deferred =q.defer();
-        ts.remove({ trainNo: { $in: data } }, function(err, docs) {
+
+
+    deleteTrainStations: function (data) {
+        var deferred = q.defer();
+        trainstation.remove({ trainNo: { $in: data } }, function (err, docs) {
             if (err) console.log(err);
             deferred.resolve(docs);
         });
