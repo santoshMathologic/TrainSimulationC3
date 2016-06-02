@@ -4,10 +4,13 @@ var multer = require('multer');
 var upload = multer({ dest: './uploads' });
 
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
+
+
 var auth = require('./auth/auth.js');
 var plans = require('./plans.js');
 var user = require('./users.js');
@@ -31,8 +34,10 @@ router.get('/sample', function (req, res) {
 });
 
 
+
 router.post('/login', auth.login);
 router.post('/register', auth.registerUser);
+
 
 
 
