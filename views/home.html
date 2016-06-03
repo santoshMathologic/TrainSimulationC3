@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="bower_components/c3/c3.min.css">
     <link rel="stylesheet" href="css/angular-material.css">
 
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-  
 
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -38,7 +38,7 @@
 </head>
 
 <body ng-app="mathoApp" ng-controller="homeCtrl">
-  <!--
+    <!--
     <table class="table table-condensed">
     <thead>
       <tr>
@@ -59,8 +59,20 @@
     </tbody>
   </table> 
   !-->
-    
-    <input type="button" ng-click="saveStation()">Save</input>
+
+    {{trainStationsList}}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary btn-xs" ng-click="saveStation()">
+                    <i class="fa fa-university" aria-hidden="true"></i>
+                    
+                </button>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 

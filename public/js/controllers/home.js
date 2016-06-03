@@ -23,18 +23,29 @@ app.controller('homeCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
             traindown: 11013
 
         };
-        var deferred = $q.defer();
+        //var deferred = $q.defer();
         $http.get(apiUrl + "/trainStations", { params: $scope.query })
             .then(function (response) {
-                deferred.resolve(response.data);
+              //  deferred.resolve(response.data);
+              
+              
+               $scope.trainStationsList = response.data;
             });
 
-        return deferred.promise;
+        //return deferred.promise;
     }
+    
+     getTrainStationList();
+    
+    
+     
+  /*
     getTrainStationList().then(function (response) {
         $scope.trainStationsList = response;
 
     });
+    */
+    
 
 
   $scope.saveStation = function(){

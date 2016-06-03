@@ -14,7 +14,7 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
     function getTrainStationList() {
         $scope.query = {
             order: 'trainNo',
-            limit: 204,
+            limit: 400,
             page: 1,
             // trainNo: {$in:[11014,11013 ]}
             trainNo: 1101 // if remove one digit from trainNo its takes as $In query
@@ -37,6 +37,7 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
         var stationdistance = [];
         var stationCode = {};
         var distance = [];
+        
 
         Array.prototype.insert = function (index, item) {  // This prototype is used for Placing X values at the desired Position
             this.splice(index, 0, item);
@@ -66,6 +67,7 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                     if ($scope.trainStationTwo[k].arrivalTime === "0:00") {
                         timeSeries.push("2012-1-" + days + " " + $scope.trainStationTwo[k].departureTime);
                         stationCode[$scope.trainStationTwo[k].distance] = $scope.trainStationTwo[k].stationCode;
+                       
                         distance.push($scope.trainStationTwo[k].distance);
                     }
                     else {
@@ -78,15 +80,20 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
 
             var depMins = [];
             var tno = [];
+            var stnCode  = [];
+            
+            // logic for save distance using train Number
             for (var j = 0; j < $scope.trainStationTwo.length; j++) {
                 if ($scope.trainStationTwo[j].trainNo == 11011) {
                     if ($scope.trainStationTwo[j].arrivalTime === "0:00") {
                         updistance.push($scope.trainStationTwo[j].distance);
                         depMins.push($scope.trainStationTwo[j].departureMinutes)
                         tno.push($scope.trainStationTwo[j].trainNo);
+                        stnCode[updistance[j]] = $scope.trainStationTwo[j].stationCode;
                     } else {
                         updistance.push($scope.trainStationTwo[j].distance);
                         depMins.push($scope.trainStationTwo[j].departureMinutes)
+                        stnCode[updistance[j]] = $scope.trainStationTwo[j].stationCode;
                         
                     }
 
@@ -95,9 +102,11 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                         downdistance.push($scope.trainStationTwo[j].distance);
                         depMins.push($scope.trainStationTwo[j].departureMinutes)
                         tno.push($scope.trainStationTwo[j].trainNo);
+                       //  stnCode[downdistance] = $scope.trainStationTwo[j].stationCode;
                     } else {
                         downdistance.push($scope.trainStationTwo[j].distance);
                         depMins.push($scope.trainStationTwo[j].departureMinutes)
+                        //stnCode[downdistance] = $scope.trainStationTwo[j].stationCode;
                     }
                 }
             }
@@ -176,8 +185,8 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
 
                 y: {
                     tick: {
-                        values: colDistance,
-                        format: function (d) { return stationCode[d]; }
+                        values: updistance,
+                        format: function (d) { return stnCode[d]; }
                     },
 
                 }
