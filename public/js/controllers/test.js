@@ -162,7 +162,8 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                 columns: [
                     timeSeries,
                     udistance,
-                    ddistance
+                    ddistance,
+                  // depMinutes
                    // trnNo,
                    // depMinutes
 
@@ -206,9 +207,8 @@ app.controller('testCtrl', function ($scope, $http, $timeout, $q, TimeCal) {
                         //+"TN :" + d[2].value + "<br>"+
                         + "distance  :" + d[0].value + "<br>"
                         + "distance  :" + d[1].value + "<br>"+
-                       // + "departure :" + d[2].value + "<br>"+
+                        //+ "depMinutes :" + d[2].value + "<br>"+
                         
-
                         "</div>";
 
                 }
